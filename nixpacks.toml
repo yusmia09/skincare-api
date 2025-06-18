@@ -12,23 +12,13 @@ nixPkgs = [
   "php82Extensions.bcmath"
 ]
 
-[phases.install]
-cmds = []
-
-[phases.build]
-cmds = [
-  "composer install --no-dev --optimize-autoloader"
-]
-
-
-[start]
-cmd = "php -S 0.0.0.0:$PORT -t public"
-
 [phases.build]
 cmds = [
   "composer install --no-dev --optimize-autoloader",
+  "php artisan config:clear",
   "ls -la",
-  "ls -la vendor",
-  "php artisan config:clear"
+  "ls -la vendor"
 ]
 
+[start]
+cmd = "php -S 0.0.0.0:$PORT -t public"
