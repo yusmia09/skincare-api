@@ -22,3 +22,6 @@ cmds = [
 
 [start]
 cmd = "php -S 0.0.0.0:$PORT -t public"
+
+[phases.install]
+cmds = []
