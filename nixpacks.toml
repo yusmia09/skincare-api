@@ -12,6 +12,9 @@ nixPkgs = [
   "php82Extensions.bcmath"
 ]
 
+[phases.install]
+cmds = []
+
 [phases.build]
 cmds = [
   "composer install --no-dev --optimize-autoloader"
