@@ -16,6 +16,7 @@ nixPkgs = [
 cmds = [
   "composer install --no-dev --optimize-autoloader",
   "php artisan config:clear",
+  "php artisan storage:link",      
   "ls -la",
   "ls -la vendor"
 ]
