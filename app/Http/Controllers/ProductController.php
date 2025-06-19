@@ -44,7 +44,7 @@ class ProductController extends Controller
             'status' => false,
             'message' => 'Validasi gagal',
             'errors' => $validator->errors()
-        ], 422); 
+        ], 422);
     }
 
     $dataProduct->name = $request->name;
@@ -55,8 +55,10 @@ class ProductController extends Controller
     $dataProduct->ingredients = $request->ingredients;
 
     if ($request->hasFile('image')) {
-        $dataProduct->image = $request->file('image')->store('product', 'public');
-    }
+    $filename = $request->file('image')->getClientOriginalName();
+    $request->file('image')->move(public_path('images/product'), $filename);
+    $dataProduct->image = 'images/product/' . $filename;
+}
 
     $dataProduct->save();
 
@@ -65,7 +67,7 @@ class ProductController extends Controller
         'message' => 'Sukses menambahkan data',
     ], 201);
 }
- 
+
     /**
      * Display the specified resource.
      */
@@ -153,7 +155,7 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $dataProduct = Product::find($id);
-        
+
     if (empty($dataProduct)){
         return response()->json([
             'status' => false,
