@@ -55,10 +55,8 @@ class ProductController extends Controller
     $dataProduct->ingredients = $request->ingredients;
 
     if ($request->hasFile('image')) {
-    $filename = $request->file('image')->getClientOriginalName();
-    $request->file('image')->move(public_path('images/product'), $filename);
-    $dataProduct->image = 'images/product/' . $filename;
-}
+        $dataProduct->image = $request->file('image')->store('product', 'public');
+    }
 
     $dataProduct->save();
 
